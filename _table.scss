@@ -1,0 +1,128 @@
+@mixin table() {
+    $borderRadius: 10px;
+    @include element("table") {
+
+        @include modifier("container") {
+            margin: 1em;
+            overflow: hidden;
+        }
+
+        @include modifier("border") {
+            border-radius: 15px;
+            border: 1px solid darken($purple, 5%);
+            -webkit-box-shadow: 0px 0px 6px 1px lighten($purple, 40%), 0 0 10px 6px inset rgba(0, 0, 0, 0.85);
+            box-shadow: 0px 0px 6px 1px lighten($purple, 40%), 0 0 10px 6px inset rgba(0, 0, 0, 0.85);
+        }
+
+        @include modifier("responsive") {
+            width: 100%;
+        }
+        
+        @include m("img") {
+            @include m("game") {
+                width: 100%;
+                max-width: 120px;
+                max-height: 102px;
+            }
+        }
+
+        table {
+            td, th { 
+                color: #fff;
+                padding: 10px;
+                text-align: center;
+                vertical-align: middle;
+            }
+            
+            th {
+                background-color: $purple;
+                font-weight: bold;
+            }
+            
+            tr {
+                &:nth-child(2n) { background-color: lighten($purple, 20%); }
+                &:nth-child(2n+1) { background-color: lighten($purple, 25%) }
+            }
+         
+            tbody > tr:hover {
+                background-color: lighten($purple, 40%);
+            }
+        }
+         
+        @media screen and (max-width: 700px) {
+            table,tbody, tr, td { display: block; }
+
+            thead {
+                display: none;
+            }
+            
+            td {
+                &:first-child {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            
+                &:not(:first-child) {
+                    clear: both;
+                    margin-left: 150px;
+                    padding: 4px 20px 4px 120px;
+                    position: relative;
+                    text-align: left;
+            
+                    &:before {
+                        color: lighten($purple, 80%);
+                        content: attr(data-th);
+                        display: block;
+                        left: 0;
+                        position: absolute;
+                    }
+                }
+            }
+            
+            tr {
+                padding: 10px 0 20px 0px;
+                position: relative;
+            }
+        }
+         
+        @media screen and (max-width: 500px) {
+            border: none; 
+            box-shadow: none;
+            overflow: visible;
+            td {
+                &:first-child { 
+                    background-color: $purple !important;
+                    border-bottom: 1px solid lighten($purple, 30%);
+                    border-radius: 15px 15px 0 0;
+                    position: relative;   
+                    top: 0;
+                    transform: translateY(0);
+                    width: 100%;
+                }
+                
+                &:not(:first-child) {
+                    margin: 0;
+                    padding: 5px 1em;
+                    width: 100%;
+                    
+                    &:before {
+                        font-size: .8em;
+                        padding-top: 0.3em;
+                        position: relative;
+                    }
+                }
+                
+                &:last-child  { padding-bottom: 1rem !important; }
+            }
+            
+            tr {
+                border: 1px solid darken($purple, 5%);
+                border-radius: 15px;
+                box-shadow: 0px 0px 6px 1px lighten($purple, 40%);
+                margin: 0.5rem 0;
+                padding: 0;
+            }
+        }
+    }
+}
